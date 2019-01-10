@@ -4,12 +4,12 @@ import re
 import time
 
 
-root_url = 'http://ai.nankai.edu.cn'
+root_url = 'http://cyber.nankai.edu.cn'
 urls = [
-    '/contentDetail/teachingStaffInit.action?channelId=c_0402&flag=1',
-    '/contentDetail/teachingStaffInit.action?channelId=c_0403&flag=2',
-    '/contentDetail/teachingStaffInit.action?channelId=c_0404&flag=3',
-    '/contentDetail/teachingStaffInit.action?channelId=c_0405&flag=4'
+    '/teachers/search/1',
+    '/teachers/search/2',
+    '/teachers/search/3',
+    '/teachers/search/4'
 ]
 
 
@@ -30,17 +30,18 @@ def find_teacher(url):
 def find_teacher_list(url):
     response = requests.get(root_url+url, headers=headers)
     page = bs(response.text, 'html.parser')
-    teacher_list = page.select('.our-team td a')
+    print(page.prettify())
+    teacher_list = page.select('.accordion-right-padding td a')
     with open('teacher.txt', 'a') as f:
         for teacher in teacher_list:
             name = teacher.get_text()
             email_list = find_teacher(teacher['href'])
             email_list = list(set(email_list))
             print(name, email_list)
-            f.write(f'人工智能学院\t{name}')
-            for email in email_list:
-                f.write(f'\t{email}')
-            f.write('\n')
+            # f.write(f'人工智能学院\t{name}')
+            # for email in email_list:
+            #     f.write(f'\t{email}')
+            # f.write('\n')
 
 
 for url in urls:

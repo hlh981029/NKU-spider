@@ -17,11 +17,14 @@ headers = {
 
 
 def find_teacher(url):
-    response = requests.get(url, headers=headers)
-    result = re.sub('\[at\]|\(at\)| at |\(~at~\)', '@', response.text, re.I)
-    result = re.sub('\[dot\]|\(dot\)| dot |\(~dot~\)|．', '.', result, re.I)
-    result = re.findall('([a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z0-9_\-\.]+)', result)
-    return result
+    try:
+        response = requests.get(url, headers=headers)
+        result = re.sub('\[at\]|\(at\)| at |\(~at~\)', '@', response.text, re.I)
+        result = re.sub('\[dot\]|\(dot\)| dot |\(~dot~\)|．', '.', result, re.I)
+        result = re.findall('([a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z0-9_\-\.]+)', result)
+        return result
+    except Exception as e:
+        return []
 
 
 def find_teacher_list(url):

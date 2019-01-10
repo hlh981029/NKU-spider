@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
 import re
-
+import time
 
 root_url = 'http://economics.nankai.edu.cn'
 urls = [
@@ -30,6 +30,7 @@ def find_teacher_list(url):
     teacher_list = page.select('.teachers-box-BX a')
     with open('teacher.txt', 'a') as f:
         for teacher in teacher_list:
+            time.sleep(0.5)
             name = teacher.get_text()
             email_list = find_teacher(teacher['href'])
             email_list = list(set(email_list))
