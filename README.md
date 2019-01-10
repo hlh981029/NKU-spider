@@ -8,6 +8,8 @@
 pip install BeautifulSoup4 requests Selenium
 python xx.py
 ```
+`teacher.txt`文件格式：
+> 学院`\t`姓名`\t`邮箱1`\t`……`\t`邮箱n`\n`
 
 ## 需要解决的问题：
 - [ ] 无错误处理，超时会报异常
