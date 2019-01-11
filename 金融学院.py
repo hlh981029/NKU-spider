@@ -17,7 +17,6 @@ headers = {
 def find_page(url):
     response = requests.get(root_url+url)
     page = bs(response.text, 'html.parser')
-    # print(page.prettify())
     teacher_list = page.select('.teachImgList')
     with open('teacher.txt', 'a') as f:
         for teacher in teacher_list:
